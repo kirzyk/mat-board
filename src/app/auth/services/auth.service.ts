@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  
   public login(email: string, password: string): boolean {
     if (email && password) {
       localStorage.setItem('mock_token', 'abc123');

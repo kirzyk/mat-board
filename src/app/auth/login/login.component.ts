@@ -33,16 +33,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginComponent implements OnInit {
   public isLoading = false;
-  public form!: FormGroup;
+  public loginForm!: FormGroup;
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly auth: AuthService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
   public login(): void {
     this.isLoading = true;
     setTimeout(() => {
-      const { email, password } = this.form.value;
-      if (this.auth.login(email!, password!)) {
+      const { email, password } = this.loginForm.value;
+      if (this.authService.login(email!, password!)) {
         this.router.navigate(['orders']);
       } else {
         alert('Invalid credentials!');

@@ -1,6 +1,6 @@
 <div class="add-order-dialog-wrapper">
   <h2 class="add-order-dialog-title">Add Order</h2>
-  <form [formGroup]="form" (ngSubmit)="save()">
+  <form [formGroup]="orderForm" (ngSubmit)="save()">
     <mat-form-field appearance="fill">
       <mat-label>Product Name</mat-label>
       <input matInput formControlName="productName" />
@@ -30,7 +30,7 @@
     <mat-checkbox formControlName="accepted">I accept the terms and conditions</mat-checkbox>
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid">
         Save Order
       </button>
       <button mat-button type="button" (click)="close()" style="margin-top: 0.5rem;">

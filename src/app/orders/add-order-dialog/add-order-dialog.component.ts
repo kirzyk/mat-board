@@ -41,7 +41,7 @@ import { IValueLabel } from '../interfaces/orders.interface';
   styleUrls: ['./add-order-dialog.component.scss'],
 })
 export class AddOrderDialogComponent implements OnInit {
-  public form!: FormGroup;
+  public orderForm!: FormGroup;
   public readonly categories: IValueLabel<string>[] = [
     { value: 'electronics', label: 'Electronics' },
     { value: 'books', label: 'Books' },
@@ -61,12 +61,12 @@ export class AddOrderDialogComponent implements OnInit {
     private readonly dialogRef: MatDialogRef<AddOrderDialogComponent>
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.createForm();
   }
 
   public save(): void {
-    if (this.form.invalid) {
+    if (this.orderForm.invalid) {
       this.snack.open('Please fill out all required fields.', 'OK', {
         duration: 2500,
       });
@@ -74,7 +74,7 @@ export class AddOrderDialogComponent implements OnInit {
     }
     const order = {
       id: uuidv4(),
-      ...this.form.value,
+      ...this.orderForm.value,
       createdAt: new Date().toISOString(),
     };
     this.ordersService.addOrder(order);
@@ -83,11 +83,11 @@ export class AddOrderDialogComponent implements OnInit {
   }
 
   public close(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 
   private createForm(): void {
-    this.form = this.formBuilder.group({
+    this.orderForm = this.formBuilder.group({
       productName: ['', Validators.required],
       category: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],

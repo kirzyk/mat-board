@@ -6,7 +6,7 @@
   </mat-form-field>
 
   <div class="table-container">
-    <table mat-table [dataSource]="(pagedOrders$ | async) || []" class="orders-table">
+    <table mat-table [dataSource]="(paginatedOrders$ | async) || []" class="orders-table" [@fadeIn]>
       <ng-container matColumnDef="productName">
         <th mat-header-cell *matHeaderCellDef>Product</th>
         <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
@@ -44,7 +44,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
-      <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableHeaders;" [@deleteAnimation]></tr>
     </table>
 
     <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]"
@@ -57,7 +57,7 @@
   </div>
 
   <ng-template #noOrders>
-    <div class="empty-state">
+    <div class="empty-state" [@fadeIn]>
       <mat-icon>inbox</mat-icon>
       <h3>No orders found</h3>
       <ng-container *ngIf="(orders$ | async) as orders">

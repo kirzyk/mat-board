@@ -6,35 +6,27 @@ import { IOrder } from '../interfaces/orders.interface';
   providedIn: 'root',
 })
 export class OrdersService {
-  private ordersSubject = new BehaviorSubject<IOrder[]>([]);
-
-  constructor() {}
+  private orders$ = new BehaviorSubject<IOrder[]>([]);
 
   public getOrders(): Observable<IOrder[]> {
-    return this.ordersSubject.asObservable();
+    return this.orders$.asObservable();
   }
 
   public addOrder(order: IOrder): void {
-    const currentOrders = this.ordersSubject.value;
+    const currentOrders = this.orders$.value;
     const updatedOrders = [order, ...currentOrders];
     localStorage.setItem('orders', JSON.stringify(updatedOrders));
-    this.ordersSubject.next(updatedOrders);
+    this.orders$.next(updatedOrders);
   }
 
   public deleteOrder(id: string): void {
-    const currentOrders = this.ordersSubject.value.filter(
-      (order) => order.id !== id
-    );
+    const currentOrders = this.orders$.value.filter((order) => order.id !== id);
     localStorage.setItem('orders', JSON.stringify(currentOrders));
-    this.ordersSubject.next(currentOrders);
+    this.orders$.next(currentOrders);
   }
 
   public loadOrders(): void {
     const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    this.ordersSubject.next(orders);
-  }
-
-  public refreshOrders(): void {
-    this.loadOrders();
+    this.orders$.next(orders);
   }
 }
