@@ -70,10 +70,6 @@ ng test
 
 ```
 
-## Final Thoughts 💭
-
-This project represents not just a technical solution, but also my enthusiasm for joining a team that clearly knows how to conduct an interview. The attention to detail, the modern tech stack, and the focus on user experience all reflect what I believe makes for great software development.
-
 ---
 
 **Built with ❤️ and ☕ for a company that knows how to interview**
