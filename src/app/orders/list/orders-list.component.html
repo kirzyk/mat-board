@@ -1,0 +1,73 @@
+<div class="orders-list-root">
+  <mat-form-field appearance="fill" class="search-field">
+    <mat-label>Search</mat-label>
+    <input matInput [formControl]="searchControl" placeholder="Type to filter..." />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="(pagedOrders$ | async) || []" class="orders-table">
+      <ng-container matColumnDef="productName">
+        <th mat-header-cell *matHeaderCellDef>Product</th>
+        <td mat-cell *matCellDef="let element">{{ element.productName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="category-badge">{{ element.category }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dueDate">
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.dueDate | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created At</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdAt | date:'medium' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button class="delete-icon-btn" (click)="deleteOrder(element.id)" aria-label="Delete order">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+    </table>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPage($event)">
+    </mat-paginator>
+
+    <ng-container *ngIf="(filteredOrders$ | async) as filteredOrders">
+      <ng-container *ngIf="filteredOrders.length === 0" [ngTemplateOutlet]="noOrders"></ng-container>
+    </ng-container>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="empty-state">
+      <mat-icon>inbox</mat-icon>
+      <h3>No orders found</h3>
+      <ng-container *ngIf="(orders$ | async) as orders">
+        <p *ngIf="orders.length === 0">
+          You haven't created any orders yet. Click "Add Order" to get started.
+        </p>
+        <p *ngIf="orders.length > 0">
+          No orders match your search criteria. Try adjusting your search terms.
+        </p>
+      </ng-container>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,58 @@
+.mat-mdc-dialog-container {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18) !important;
+}
+
+.add-order-dialog-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: none;
+  padding: 32px 24px 24px 24px;
+  background: transparent;
+}
+
+.add-order-dialog-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #223a5e;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+button[mat-raised-button] {
+  width: 100%;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+}
+
+button[mat-button] {
+  width: 100%;
+  font-size: 15px;
+  border-radius: 8px;
+  color: #1976d2;
+}
