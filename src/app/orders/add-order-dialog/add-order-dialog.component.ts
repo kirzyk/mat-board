@@ -83,7 +83,7 @@ export class AddOrderDialogComponent implements OnInit {
   }
 
   public close(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   private createForm(): void {
