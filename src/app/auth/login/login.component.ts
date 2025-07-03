@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly snack: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +58,7 @@ export class LoginComponent implements OnInit {
       if (this.authService.login(email!, password!)) {
         this.router.navigate(['orders']);
       } else {
-        alert('Invalid credentials!');
+        this.snack.open('Invalid credentials!', 'Close', { duration: 3000 });
       }
       this.isLoading = false;
     }, 1000);
