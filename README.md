@@ -40,16 +40,7 @@ npm install
 ng serve
 ```
 
-Navigate to `http://localhost:4200/` and prepare to be amazed! 🎉
-
-## Features That Make Me Proud 😎
-
-- **Mock Authentication**: Login with any email/password combo (because we're rebels)
-- **Real-time Search**: Type and watch the magic happen
-- **Beautiful Empty States**: Because empty doesn't have to mean boring
-- **Smooth Animations**: Everything moves like butter
-- **Accessibility**: Because everyone deserves a great UX
-- **Clean Code**: Because future me will thank past me
+Navigate to `http://localhost:4200/`
 
 ## Project Structure 📁
 
